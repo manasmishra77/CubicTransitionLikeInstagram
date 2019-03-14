@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6EDE7142232D2EF000E47D8 /* WrapperScollerUICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EDE7132232D2EF000E47D8 /* WrapperScollerUICollectionView.swift */; };
+		B6EDE7172232D3F1000E47D8 /* CubicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EDE7152232D3F1000E47D8 /* CubicCollectionViewCell.swift */; };
+		B6EDE7182232D3F1000E47D8 /* CubicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6EDE7162232D3F1000E47D8 /* CubicCollectionViewCell.xib */; };
 		B6FBF51522318737008B80E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FBF51422318737008B80E2 /* AppDelegate.swift */; };
 		B6FBF51722318737008B80E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FBF51622318737008B80E2 /* ViewController.swift */; };
 		B6FBF51A22318737008B80E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6FBF51822318737008B80E2 /* Main.storyboard */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B6EDE7132232D2EF000E47D8 /* WrapperScollerUICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperScollerUICollectionView.swift; sourceTree = "<group>"; };
+		B6EDE7152232D3F1000E47D8 /* CubicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6EDE7162232D3F1000E47D8 /* CubicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CubicCollectionViewCell.xib; sourceTree = "<group>"; };
 		B6FBF51122318737008B80E2 /* CubicTransitionLikeInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubicTransitionLikeInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FBF51422318737008B80E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6FBF51622318737008B80E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +105,9 @@
 			children = (
 				B6FBF51422318737008B80E2 /* AppDelegate.swift */,
 				B6FBF51622318737008B80E2 /* ViewController.swift */,
+				B6EDE7132232D2EF000E47D8 /* WrapperScollerUICollectionView.swift */,
+				B6EDE7152232D3F1000E47D8 /* CubicCollectionViewCell.swift */,
+				B6EDE7162232D3F1000E47D8 /* CubicCollectionViewCell.xib */,
 				B6FBF51822318737008B80E2 /* Main.storyboard */,
 				B6FBF51B22318738008B80E2 /* Assets.xcassets */,
 				B6FBF51D22318738008B80E2 /* LaunchScreen.storyboard */,
@@ -230,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FBF51F22318738008B80E2 /* LaunchScreen.storyboard in Resources */,
+				B6EDE7182232D3F1000E47D8 /* CubicCollectionViewCell.xib in Resources */,
 				B6FBF51C22318738008B80E2 /* Assets.xcassets in Resources */,
 				B6FBF51A22318737008B80E2 /* Main.storyboard in Resources */,
 			);
@@ -257,6 +267,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FBF51722318737008B80E2 /* ViewController.swift in Sources */,
+				B6EDE7172232D3F1000E47D8 /* CubicCollectionViewCell.swift in Sources */,
+				B6EDE7142232D2EF000E47D8 /* WrapperScollerUICollectionView.swift in Sources */,
 				B6FBF51522318737008B80E2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
