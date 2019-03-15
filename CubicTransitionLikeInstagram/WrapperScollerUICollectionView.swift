@@ -24,11 +24,13 @@ class WrapperScollerUICollectionView: UICollectionView {
     fileprivate var collViewDelegate: WrapperScollerUICollectionViewDelgate!
     fileprivate var cellWidth: CGFloat = 0.0
     private var contentArrayCount: Int = 0
+    
+    fileprivate var t = CATransform3DIdentity
 
     func initialSetUp(delegate: WrapperScollerUICollectionViewDelgate) {
         let cellNib = UINib.init(nibName: "CubicCollectionViewCell", bundle: nil)
         self.register(cellNib, forCellWithReuseIdentifier: "CubicCollectionViewCell")
-        self.isScrollEnabled = false
+        self.isScrollEnabled = true
         if let flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
@@ -48,6 +50,8 @@ class WrapperScollerUICollectionView: UICollectionView {
         wrapperScrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)
         wrapperScrollView.delegate = self
         wrapperScrollViewInitialSetUp()
+        //SetUp For transformation
+        t.m34 = 1.0 / -500
     }
     
     func wrapperScrollViewInitialSetUp() {
@@ -79,9 +83,13 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = contentSizeOfCollectionview
+        var cellSize = contentSizeOfCollectionview
         cellWidth = cellSize.width
+        cellSize.height -= 200
         return cellSize
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -91,18 +99,9 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.contentOffset = scrollView.contentOffset
-        for cellIndexPath in self.indexPathsForVisibleItems {
-            
-        }
-        
         for cell in self.visibleCells {
             if let cell = cell as? CubicCollectionViewCell {
-                let cellOrigin = cell.frame.origin
-                let cellOriginAccordingToView = cell.convert(cellOrigin, to: self)
-                if cellOriginAccordingToView.x > 5, cellOriginAccordingToView.x < contentSize.width {
-                    //Cell is going towrds left
-                }
-                
+                self.doTransitionToTheCell(cell: cell, contentOffSetX: scrollView.contentOffset.x)
             }
         }
     }
@@ -116,6 +115,14 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
 
 //Requirement related methods
 extension WrapperScollerUICollectionView {
+    func doTransitionToTheCell(cell: CubicCollectionViewCell, contentOffSetX: CGFloat) {
+        let cellOriginX = cell.frame.origin.x
+        let offSetFromScreen = cellOriginX - contentOffSetX
+        let scale = offSetFromScreen/cellWidth
+        let angleToRotate = Double(0.5*scale)*Double.pi
+        t = CATransform3DRotate(t, CGFloat(angleToRotate), 0, 1, 0)
+        cell.contentCubicView.layer.transform = t
+    }
    
 }
 
