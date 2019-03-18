@@ -51,7 +51,7 @@ class WrapperScollerUICollectionView: UICollectionView {
         wrapperScrollView.delegate = self
         wrapperScrollViewInitialSetUp()
         //SetUp For transformation
-        t.m34 = 1.0 / -500
+        
     }
     
     func wrapperScrollViewInitialSetUp() {
@@ -72,7 +72,11 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
         let index = indexPath.row%contentArrayCount
         let mainView = collViewDelegate.cellForIndex(self, index: index)
         mainView.frame = cell.contentCubicView.bounds
+        cell.backgroundColor = .green
+        mainView.clipsToBounds = true
+        cell.contentCubicView.clipsToBounds = true
         cell.contentCubicView.addSubview(mainView)
+        cell.contentCubicView.backgroundColor = .red
         mainView.translatesAutoresizingMaskIntoConstraints = false
         mainView.topAnchor.constraint(equalTo: cell.contentCubicView.topAnchor).isActive = true
         mainView.bottomAnchor.constraint(equalTo: cell.contentCubicView.bottomAnchor).isActive = true
@@ -120,8 +124,22 @@ extension WrapperScollerUICollectionView {
         let offSetFromScreen = cellOriginX - contentOffSetX
         let scale = offSetFromScreen/cellWidth
         let angleToRotate = Double(0.5*scale)*Double.pi
+        var t = CATransform3DIdentity
+        t.m34 = 1.0 / -500
+        //t.m34 = 1.0 / -1000
         t = CATransform3DRotate(t, CGFloat(angleToRotate), 0, 1, 0)
+        self.changeTheAnchorPointOfTheLayer(view: cell.contentCubicView, scale: scale)
         cell.contentCubicView.layer.transform = t
+    }
+    
+    func changeTheAnchorPointOfTheLayer(view: UIView, scale: CGFloat) {
+        if scale < 0 {
+            let aP = 0.5 - scale*0.5
+            view.layer.anchorPoint = CGPoint(x: aP, y: 0.5)
+        } else {
+            let aP = 0.5 - scale*0.5
+            view.layer.anchorPoint = CGPoint(x: aP, y: 0.5)
+        }
     }
    
 }

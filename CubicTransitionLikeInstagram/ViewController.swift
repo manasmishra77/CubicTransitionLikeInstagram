@@ -43,9 +43,18 @@ extension ViewController: WrapperScollerUICollectionViewDelgate {
     }
     
     func cellForIndex(_ collectionView: WrapperScollerUICollectionView, index: Int) -> UIView {
-        let view = UIView()
-        view.backgroundColor = UIColor.random()
-        return view
+        let mainView = UIView(frame: self.view.bounds)
+        mainView.backgroundColor = UIColor.random()
+        let imageView = UIImageView(frame: mainView.bounds)
+        imageView.image = UIImage(named: "nature")
+        mainView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 0).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: 0).isActive = true
+        
+        return mainView
     }
     
     func itemSizeForIndex(_ collectionView: WrapperScollerUICollectionView, index: Int) -> CGSize {
