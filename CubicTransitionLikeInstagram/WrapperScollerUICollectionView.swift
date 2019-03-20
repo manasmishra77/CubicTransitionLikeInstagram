@@ -107,21 +107,21 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).x > 0 {
-            scrollingdirection = .left
-        } else {
-            scrollingdirection = .right
-        }
+//        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).x > 0 {
+//            scrollingdirection = .left
+//        } else {
+//            scrollingdirection = .right
+//        }
+        scrollingdirection = .left
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.contentOffset = scrollView.contentOffset
         for cell in self.visibleCells {
             if scrollingdirection == .left {
-                let leftindexPath = self.indexPath(for: cell)
-            }
-            if let cell = cell as? CubicCollectionViewCell {
-                self.doTransitionToTheCell(cell: cell, contentOffSetX: scrollView.contentOffset.x)
+                if let cell = cell as? CubicCollectionViewCell {
+                    self.doTransitionToTheCell(cell: cell, contentOffSetX: scrollView.contentOffset.x, scrollingDirection: .left)
+                }
             }
         }
     }
@@ -135,7 +135,7 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
 
 //Requirement related methods
 extension WrapperScollerUICollectionView {
-    func doTransitionToTheCell(cell: CubicCollectionViewCell, contentOffSetX: CGFloat) {
+    func doTransitionToTheCell(cell: CubicCollectionViewCell, contentOffSetX: CGFloat, scrollingDirection: ScrollingDirection) {
         let cellOriginX = cell.frame.origin.x
         let offSetFromScreen = cellOriginX - contentOffSetX
         let scale = offSetFromScreen/cellWidth
@@ -146,7 +146,17 @@ extension WrapperScollerUICollectionView {
         t = CATransform3DRotate(t, CGFloat(angleToRotate), 0, 1, 0)
         //self.changeTheAnchorPointOfTheLayer(view: cell.contentCubicView, scale: scale)
         cell.contentCubicView.layer.transform = t
-        cell.leadingConstarintContentCubicView.constant = cellWidth*scale
+        if scrollingDirection == .left {
+            if scale < 0 {// left cell
+                cell.backgroundColor = .red
+                cell.trailingConstarintContentCubicView.constant = cellWidth*scale
+            } else { // right cell
+                cell.backgroundColor = .black
+                cell.leadingConstarintContentCubicView.constant = -cellWidth*(scale)
+            }
+        }
+        
+        //cell.leadingConstarintContentCubicView.constant = cellWidth*scale
     }
     
     func changeTheAnchorPointOfTheLayer(view: UIView, scale: CGFloat) {
