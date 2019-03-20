@@ -17,6 +17,10 @@ protocol WrapperScollerUICollectionViewDelgate {
 }
 
 class WrapperScollerUICollectionView: UICollectionView {
+    enum ScrollingDirection {
+        case left
+        case right
+    }
     var contentSizeOfCollectionview: CGSize {
         return UIScreen.main.bounds.size
     }
@@ -25,7 +29,8 @@ class WrapperScollerUICollectionView: UICollectionView {
     fileprivate var cellWidth: CGFloat = 0.0
     private var contentArrayCount: Int = 0
     
-    fileprivate var t = CATransform3DIdentity
+    fileprivate var scrollingdirection: ScrollingDirection?
+    
 
     func initialSetUp(delegate: WrapperScollerUICollectionViewDelgate) {
         let cellNib = UINib.init(nibName: "CubicCollectionViewCell", bundle: nil)
@@ -53,6 +58,7 @@ class WrapperScollerUICollectionView: UICollectionView {
         //SetUp For transformation
         
     }
+
     
     func wrapperScrollViewInitialSetUp() {
     }
@@ -100,10 +106,20 @@ extension WrapperScollerUICollectionView: UICollectionViewDelegate, UICollection
         collViewDelegate.selectedItemIndex(indexPath.row%contentArrayCount)
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).x > 0 {
+            scrollingdirection = .left
+        } else {
+            scrollingdirection = .right
+        }
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.contentOffset = scrollView.contentOffset
         for cell in self.visibleCells {
+            if scrollingdirection == .left {
+                let leftindexPath = self.indexPath(for: cell)
+            }
             if let cell = cell as? CubicCollectionViewCell {
                 self.doTransitionToTheCell(cell: cell, contentOffSetX: scrollView.contentOffset.x)
             }
@@ -128,16 +144,17 @@ extension WrapperScollerUICollectionView {
         t.m34 = 1.0 / -500
         //t.m34 = 1.0 / -1000
         t = CATransform3DRotate(t, CGFloat(angleToRotate), 0, 1, 0)
-        self.changeTheAnchorPointOfTheLayer(view: cell.contentCubicView, scale: scale)
+        //self.changeTheAnchorPointOfTheLayer(view: cell.contentCubicView, scale: scale)
         cell.contentCubicView.layer.transform = t
+        cell.leadingConstarintContentCubicView.constant = cellWidth*scale
     }
     
     func changeTheAnchorPointOfTheLayer(view: UIView, scale: CGFloat) {
         if scale < 0 {
-            let aP = 0.5 - scale*0.5
+            let aP: Double = 0.0
             view.layer.anchorPoint = CGPoint(x: aP, y: 0.5)
         } else {
-            let aP = 0.5 - scale*0.5
+            let aP: Double = 1.0
             view.layer.anchorPoint = CGPoint(x: aP, y: 0.5)
         }
     }

@@ -19,11 +19,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDn-W4-LNa">
-                                <rect key="frame" x="62.5" y="258.5" width="250" height="150"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nature" translatesAutoresizingMaskIntoConstraints="NO" id="xml-uu-H6Q">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.60420240830000005" blue="0.57559318739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Yxb-aW-72c"/>
-                                    <constraint firstAttribute="width" constant="250" id="dOF-WA-FLH"/>
+                                    <constraint firstAttribute="bottom" secondItem="xml-uu-H6Q" secondAttribute="bottom" id="GSN-WI-V85"/>
+                                    <constraint firstItem="xml-uu-H6Q" firstAttribute="top" secondItem="SDn-W4-LNa" secondAttribute="top" id="Qrs-Tz-JUW"/>
+                                    <constraint firstAttribute="trailing" secondItem="xml-uu-H6Q" secondAttribute="trailing" id="UaA-ZF-Cl6"/>
+                                    <constraint firstItem="xml-uu-H6Q" firstAttribute="leading" secondItem="SDn-W4-LNa" secondAttribute="leading" id="Wsf-mZ-PU2"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0D-hM-hvL">
@@ -54,19 +61,36 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rPA-QK-MJf">
+                                <rect key="frame" x="98" y="487" width="179" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="93x-VE-5XP"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="sliderVal:" destination="BYZ-38-t0r" eventType="valueChanged" id="TVf-14-VrL"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SDn-W4-LNa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Dl-MW-uxe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SDn-W4-LNa" secondAttribute="bottom" id="4Oc-0N-4OE"/>
+                            <constraint firstItem="SDn-W4-LNa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8C8-5H-N7t"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8JZ-L2-1kI" secondAttribute="bottom" id="Ahm-fB-zWk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SDn-W4-LNa" secondAttribute="trailing" id="Cqw-ds-NcZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8JZ-L2-1kI" secondAttribute="trailing" id="DEy-LJ-iM7"/>
-                            <constraint firstItem="SDn-W4-LNa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XOW-Ye-uex"/>
+                            <constraint firstItem="rPA-QK-MJf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="EUP-81-RLJ"/>
                             <constraint firstItem="8JZ-L2-1kI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a3K-DK-P92"/>
+                            <constraint firstItem="SDn-W4-LNa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bac-Xg-nsB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rPA-QK-MJf" secondAttribute="bottom" constant="150" id="nI3-ZA-3lf"/>
                             <constraint firstItem="8JZ-L2-1kI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qd3-2d-cIV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rPA-QK-MJf" secondAttribute="trailing" constant="100" id="rba-el-O2g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="leadingView1" destination="8C8-5H-N7t" id="yHA-18-con"/>
+                        <outlet property="sliderToChangeScale" destination="rPA-QK-MJf" id="hbo-I3-SS6"/>
+                        <outlet property="trailingView1" destination="Cqw-ds-NcZ" id="vYa-nu-blK"/>
                         <outlet property="view1" destination="SDn-W4-LNa" id="p74-Xa-fxY"/>
                         <outlet property="wrapperCollectionView" destination="8JZ-L2-1kI" id="sec-cv-3Cw"/>
                     </connections>
@@ -76,4 +100,7 @@
             <point key="canvasLocation" x="93.599999999999994" y="27.436281859070466"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="nature" width="115.19999694824219" height="192"/>
+    </resources>
 </document>

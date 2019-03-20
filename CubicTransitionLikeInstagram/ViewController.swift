@@ -12,12 +12,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var wrapperCollectionView: WrapperScollerUICollectionView!
     
     var shouldreverse: Bool = false
-
+    @IBOutlet weak var leadingView1: NSLayoutConstraint!
+    
+    @IBOutlet weak var trailingView1: NSLayoutConstraint!
+    @IBOutlet weak var sliderToChangeScale: UISlider!
+    
+    
     @IBOutlet weak var view1: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         wrapperCollectionView.initialSetUp(delegate: self)
+        view.backgroundColor = .red
     }
     
     func animateCubic() {
@@ -33,6 +39,22 @@ class ViewController: UIViewController {
         } else {
             animateCubic()
         }
+    }
+    @IBAction func sliderVal(_ sender: UISlider) {
+//        let cellOriginX = cell.frame.origin.x
+//        let offSetFromScreen = cellOriginX - contentOffSetX
+        let scale = sender.value
+        let angleToRotate = Double(0.5*scale)*Double.pi
+        var t = CATransform3DIdentity
+        
+        t.m34 = 1.0 / -500
+        //t.m34 = 1.0 / -1000
+        //view1.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
+        
+        t = CATransform3DRotate(t, CGFloat(angleToRotate), 0, 1, 0)
+        view1.layer.transform = t
+        let sccreenWidth = UIScreen.main.bounds.width
+        leadingView1.constant = sccreenWidth*CGFloat(scale)
     }
     
 }

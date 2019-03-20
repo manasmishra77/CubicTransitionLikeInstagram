@@ -34,6 +34,8 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
                 <outlet property="contentCubicView" destination="kj9-dY-A3z" id="6Tn-ZX-JGb"/>
+                <outlet property="leadingConstarintContentCubicView" destination="R57-Ka-EP1" id="8Dl-6V-5mL"/>
+                <outlet property="trailingConstarintContentCubicView" destination="AOR-Ia-Udb" id="GdD-Dw-DqN"/>
             </connections>
         </collectionViewCell>
     </objects>

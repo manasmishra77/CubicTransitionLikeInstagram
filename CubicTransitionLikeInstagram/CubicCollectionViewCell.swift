@@ -10,6 +10,8 @@ import UIKit
 
 class CubicCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var leadingConstarintContentCubicView: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstarintContentCubicView: NSLayoutConstraint!
     @IBOutlet weak var contentCubicView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
